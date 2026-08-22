@@ -199,6 +199,45 @@ $combined_body"
     fi
 fi
 
+# ── Third-party skills ──────────────────────────────────────
+# Symlinks every SKILL.md found under third-party/ submodules into
+# skills/. On a name collision, the submodule listed here wins and
+# the others are skipped for that name (e.g. third-party/caveman's
+# own "caveman" skill takes precedence over third-party/skills').
+if [[ "$TOOL" != "pi" ]]; then
+    if [[ "$CHECK" != "--check" ]]; then
+        echo ""
+        echo "🔧 Linking $TOOL third-party skills..."
+    fi
+
+    declare -A SKIP_LINK=( [caveman]="third-party/caveman" )
+    skills_dir="$REPO_ROOT/skills"
+
+    while IFS= read -r -d '' skill_md; do
+        skill_dir="$(dirname "$skill_md")"
+        name="$(basename "$skill_dir")"
+        rel="${skill_dir#"$SHARED_DIR"/}"
+        winner="${SKIP_LINK[$name]:-}"
+        if [[ -n "$winner" && "$rel" != "$winner"/* ]]; then
+            continue
+        fi
+
+        link="$skills_dir/$name"
+        target="../shared/$rel"
+
+        if [[ "$CHECK" == "--check" ]]; then
+            if [[ "$(readlink "$link" 2>/dev/null)" != "$target" ]]; then
+                echo "STALE:   $link"
+                ((errors++))
+            fi
+        else
+            mkdir -p "$skills_dir"
+            ln -sfn "$target" "$link"
+            echo "  ✅ $link -> $target"
+        fi
+    done < <(find "$SHARED_DIR"/third-party/*/skills -mindepth 1 -name SKILL.md -print0 2>/dev/null)
+fi
+
 # ── Summary ─────────────────────────────────────────────────
 echo ""
 if [[ "$CHECK" == "--check" ]]; then

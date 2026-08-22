@@ -1,0 +1,9 @@
+[submodule "third-party/agent-skills"]
+	path = third-party/agent-skills
+	url = https://github.com/addyosmani/agent-skills
+[submodule "third-party/caveman"]
+	path = third-party/caveman
+	url = https://github.com/JuliusBrussee/caveman
+[submodule "third-party/skills"]
+	path = third-party/skills
+	url = https://github.com/dotbrains/skills
