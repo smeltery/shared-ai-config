@@ -6,4 +6,4 @@
 	url = https://github.com/JuliusBrussee/caveman
 [submodule "third-party/skills"]
 	path = third-party/skills
-	url = https://github.com/dotbrains/skills
+	url = https://github.com/smeltery/skills

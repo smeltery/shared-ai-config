@@ -2,7 +2,7 @@
 
 [![License: PolyForm Shield 1.0.0](https://img.shields.io/badge/License-PolyForm%20Shield%201.0.0-blue.svg)](https://polyformproject.org/licenses/shield/1.0.0/)
 
-Shared agent and skill definitions used by both [OpenCode](https://github.com/dotbrains/opencode) and [Claude Code](https://github.com/dotbrains/claude) configurations.
+Shared agent and skill definitions used by both [OpenCode](https://github.com/smeltery/opencode) and [Claude Code](https://github.com/smeltery/claude) configurations.
 
 ## Contents
 
