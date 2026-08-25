@@ -10,7 +10,7 @@ set -euo pipefail
 #   ./shared/assemble.sh <tool>          # Assemble files
 #   ./shared/assemble.sh <tool> --check  # Verify files are up-to-date
 #
-# Where <tool> is "opencode", "claude", "codex", or "pi".
+# Where <tool> is "opencode", "claude", "codex", "pi", or "cursor".
 # Run from the tool repo root (where shared/ is a submodule).
 # ─────────────────────────────────────────────────────────────
 
@@ -19,12 +19,12 @@ CHECK="${2:-}"
 SHARED_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [[ -z "$TOOL" ]]; then
-    echo "Usage: ./shared/assemble.sh <opencode|claude|codex|pi> [--check]"
+    echo "Usage: ./shared/assemble.sh <opencode|claude|codex|pi|cursor> [--check]"
     exit 1
 fi
 
-if [[ "$TOOL" != "opencode" && "$TOOL" != "claude" && "$TOOL" != "codex" && "$TOOL" != "pi" ]]; then
-    echo "Error: tool must be 'opencode', 'claude', 'codex', or 'pi', got '$TOOL'"
+if [[ "$TOOL" != "opencode" && "$TOOL" != "claude" && "$TOOL" != "codex" && "$TOOL" != "pi" && "$TOOL" != "cursor" ]]; then
+    echo "Error: tool must be 'opencode', 'claude', 'codex', 'pi', or 'cursor', got '$TOOL'"
     exit 1
 fi
 
