@@ -210,14 +210,20 @@ if [[ "$TOOL" != "pi" ]]; then
         echo "🔧 Linking $TOOL third-party skills..."
     fi
 
-    declare -A SKIP_LINK=( [caveman]="third-party/caveman" )
+    third_party_skill_winner() {
+        case "$1" in
+            caveman) printf '%s' "third-party/caveman" ;;
+            *) printf '' ;;
+        esac
+    }
+
     skills_dir="$REPO_ROOT/skills"
 
     while IFS= read -r -d '' skill_md; do
         skill_dir="$(dirname "$skill_md")"
         name="$(basename "$skill_dir")"
         rel="${skill_dir#"$SHARED_DIR"/}"
-        winner="${SKIP_LINK[$name]:-}"
+        winner="$(third_party_skill_winner "$name")"
         if [[ -n "$winner" && "$rel" != "$winner"/* ]]; then
             continue
         fi
